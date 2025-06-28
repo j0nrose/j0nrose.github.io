@@ -1,0 +1,275 @@
+body {
+  font-family: 'Zilla Slab', arial, sans-serif;
+  font-weight: lighter;
+  color: #f5f5f5;
+  background-color: #d2d9db;
+  cursor: default;
+  color: #0e1111;
+}
+
+.job-pad {
+  margin-top: 0px;
+  color: white;
+}
+
+.name-pad {
+  font-size: 100px;
+  margin: 0;
+  margin-bottom: 4px;
+  color: white;
+}
+
+.place-pad {
+  color: white;
+}
+
+h2 {
+  font-size: 32px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+/* Use viewport-relative (vw = viewport width) units to cover the page fully */
+body {
+  height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+}
+
+/* Override the browser default to prevent extra width/height on the edges */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Include the border and padding when calculating width and height of 
+  all elements. This prevents '100vh' and '100vw' being slightly larger 
+  than the viewport and creating unwanted scrollbars on certain browsers. */
+* {
+  box-sizing: border-box;
+}
+
+/* Full-sized container that fills up the parent element <body> */
+.content-container {
+  text-align: center;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+}
+
+.content-container p {
+  font-size: 20px;
+}
+
+/* Container for the background image that fills up the 
+  parent element content-container. Uses z-index to put 
+  the background image behind the text content. Hides any 
+  overflowing portions of it's child <img> element */
+.bg-img-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Background image that fills up 100% of parent element bg-img-container.
+  Important that 'width' property is not set and only 'height' is set to 100%
+  so that the image retains it's normal aspect ratio and is not stretched.
+  Setting the min-width and min-height will make it adjust to fit those as 
+  necessary depending on the viewport size without stretching the image
+  out of it's normal aspect ratio. */
+.bg-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Container for the text and button elements, fills the entire 
+  parent content-container and uses flex to center all of the content. */
+.center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 40px;
+  box-shadow: 0 0 28px rgba(0, 0, 0, 0.12);
+}
+
+.center-container h1,
+.center-container h2 {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.36);
+}
+
+/* Mobile styles that will only apply when the screen size is below 1000px wide. */
+@media screen and (max-width: 999px) {
+
+  /* Move the content up so it looks a bit better on mobile */
+  .center-container {
+    justify-content: flex-start;
+    padding-top: min(40%, 240px);
+  }
+
+  /* Sets the font-size to 10% of the viewport width so that it scales based on 
+    the size of the screen. Uses the CSS max() function which will calculate the 
+    given values at runtime and use only the one which is larger. So if 10% of the 
+    viewport width is anything less than 24px, then it will use 24px as the font-size.
+    This prevents the font from becoming tiny and unreadable on very small phones. */
+  .center-container h1 {
+    font-size: max(10vw, 36px);
+  }
+
+  .center-container h2 {
+    font-size: max(3.2vw, 18px);
+  }
+}
+
+/* START ICON BUTTON STYLES */
+.icon-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.icon-buttons .icon {
+  position: relative;
+  background: #fff;
+  border-radius: 50%;
+  padding: 12px;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 8px 10px 10px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.icon-buttons .icon.upwork {
+  padding: 10px;
+}
+
+.icon-buttons .icon img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0%);
+  transition: filter 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.icon-buttons .icon .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #fff;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.icon-buttons .icon .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #fff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.icon-buttons .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.icon-buttons .icon:hover img {
+  filter: brightness(100%);
+}
+
+.icon-buttons .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.icon-buttons .icon:hover,
+.icon-buttons .icon:hover .tooltip,
+.icon-buttons .icon:hover .tooltip::before {
+  background: #333;
+  color: #fff;
+}
+
+/* END ICON BUTTON STYLES */
+
+.country-cards .card-deck .card {
+  min-width: 160px;
+  max-width: 250px;
+  margin: 18px;
+}
+
+.country-cards .card-deck .card .badge {
+  font-weight: 500;
+}
+
+.country-cards .card-deck .card .card-img-top-container {
+  height: 100px;
+  overflow: hidden;
+}
+
+.country-cards .card-deck .card .card-img-top-container img {
+  min-width: 100%;
+  min-height: 100%;
+  height: 100%;
+}
+
+.card {
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+}
+
+.flag-icon-button {
+  width: 90px;
+  height: 67.5px;
+  overflow: hidden;
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+}
+
+.flag-icon-button .svg-container {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  line-height: 0;
+  font-size: 0;
+}
+
+.crypto-addresses-container {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+#clock {
+	font-family: 'Inconsolata', monospace;
+}
+
+.import {
+	font-size: larger !important;
+}
